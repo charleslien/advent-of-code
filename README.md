@@ -1,2 +1,2 @@
 # Advent of Code
-Code for adventofcode.com
+Code for https://adventofcode.com
