@@ -76,6 +76,14 @@ def multiset(iterable, keys=None):
   return {k: counts.get(k, 0) for k in keys}
 
 
+def num_to_base(num, base):
+  radices = []
+  while num > 0:
+    radices.append(num % base)
+    num //= base
+  return list(reversed(radices))
+
+
 def powerset(iterable):
   'powerset([1,2,3]) --> () (1,) (2,) (3,) (1,2) (1,3) (2,3) (1,2,3)'
   s = list(iterable)
