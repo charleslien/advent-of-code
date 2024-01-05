@@ -67,9 +67,8 @@ def groups_of(num, iterable):
     if len(group) >= num:
       groups.append(group)
       group = []
-  if len(group) != num:
+  if group:
     print(f'Warning: Total number of elements not divisible by {num}!')
-  groups.append(group)
   return groups
 
 
