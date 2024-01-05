@@ -35,13 +35,27 @@ N = np.array([-1, 0])
 E = np.array([0, 1])
 S = np.array([1, 0])
 W = np.array([0, -1])
-ORTHOGONAL_DIRS = {tuple(d) for d in [N, E, S, W]}
-DIAGONAL_DIRS = {tuple(d) for d in [N + E, N + W, S + E, S + W]}
-ADJ_DIRS = ORTHOGONAL_DIRS | DIAGONAL_DIRS
+ORTHOGONAL_DIRS = [N, E, S, W]
+DIAGONAL_DIRS = [N + E, N + W, S + E, S + W]
+ADJ_DIRS = ORTHOGONAL_DIRS + DIAGONAL_DIRS
 UP = N
 DOWN = S
 LEFT = W
 RIGHT = E
+
+
+def get(lst, index, default):
+  if isinstance(index, int):
+    if index < 0 or index >= len(lst):
+      return default
+    return lst[index]
+  if isinstance(index, Iterable):
+    for i in index:
+      if i < 0 or i >= len(lst):
+        return default
+      lst = lst[i]
+    return lst
+  raise ValueError('index must be of type int or Iterable[int].')
 
 
 def groups_of(num, iterable):
