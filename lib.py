@@ -44,6 +44,20 @@ LEFT = W
 RIGHT = E
 
 
+def valid_index(lst, index):
+  if isinstance(index, int):
+    if index < 0 or index >= len(lst):
+      return False
+    return lst[index]
+  if isinstance(index, Iterable):
+    for i in index:
+      if i < 0 or i >= len(lst):
+        return False
+      lst = lst[i]
+    return True
+  raise ValueError('index must be of type int or Iterable[int].')
+
+
 def get(lst, index, default):
   if isinstance(index, int):
     if index < 0 or index >= len(lst):
