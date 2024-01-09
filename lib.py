@@ -90,7 +90,6 @@ def groups_of(num, iterable):
 def int_round(x):
   rounded = np.round(x)
   if isinstance(x, Iterable):
-    print(rounded)
     return rounded.astype(int)
   return int(rounded)
 
