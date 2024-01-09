@@ -103,13 +103,17 @@ def multiset(iterable, keys=None):
   return {k: counts.get(k, 0) for k in keys}
 
 
-def num_to_base(num, base):
+def num_to_base(num, base, fixed_len=None):
   radices = []
   while num > 0:
     radices.append(num % base)
     num //= base
-  return list(reversed(radices))
-
+  if fixed_len is None:
+    return list(reversed(radices))
+  if len(radices) > fixed_len:
+    print(f'{num} in base {base} is longer than given fixed length {fixed_len}.')
+  prefix = [0 for _ in range(fixed_len - len(radices)]
+  return prefix + radices
 
 def powerset(iterable):
   'powerset([1,2,3]) --> () (1,) (2,) (3,) (1,2) (1,3) (2,3) (1,2,3)'
