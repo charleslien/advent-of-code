@@ -112,7 +112,7 @@ def num_to_base(num, base, fixed_len=None):
     return list(reversed(radices))
   if len(radices) > fixed_len:
     print(f'{num} in base {base} is longer than given fixed length {fixed_len}.')
-  prefix = [0 for _ in range(fixed_len - len(radices)]
+  prefix = [0 for _ in range(fixed_len - len(radices))]
   return prefix + radices
 
 def powerset(iterable):
