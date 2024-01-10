@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections import defaultdict, deque
-from collections.abc import Iterable\
+from collections.abc import Iterable
 from dataclasses import dataclass
 import heapq
 import itertools
