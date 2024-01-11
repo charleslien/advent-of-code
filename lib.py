@@ -3,6 +3,7 @@ from collections.abc import Iterable
 from dataclasses import dataclass
 import heapq
 import itertools
+from itertools import permutations
 import re
 import numpy as np
 from numpy.polynomial import Polynomial
