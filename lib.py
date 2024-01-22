@@ -1,6 +1,7 @@
 from collections import defaultdict, deque
 from collections.abc import Iterable
 from dataclasses import dataclass
+from functools import cache
 import heapq
 import itertools
 from itertools import permutations
