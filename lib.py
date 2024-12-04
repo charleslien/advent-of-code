@@ -144,7 +144,7 @@ def process_raw(raw: str, num_to_print: int = 10) -> list[str] | list[list[str]]
       if len(lines) != first_len:
         uniform = False
     if uniform:
-      print(f'Each block has {len(liness[0])} lines.')
+      print(f'Each block has {first_len} lines.')
       return liness
 
     if len(liness) < num_to_print:
@@ -166,10 +166,10 @@ def process_raw(raw: str, num_to_print: int = 10) -> list[str] | list[list[str]]
   first_len = len(lines[0])
   for line in lines:
     if len(lines) != first_len:
-      uniform = Falses
+      uniform = False
       break
   if uniform:
-    print(f'Each line has {first_len} characters.')
+    print(f'{first_len} characters in each line.')
     return lines
 
   max_len = 0
@@ -177,8 +177,8 @@ def process_raw(raw: str, num_to_print: int = 10) -> list[str] | list[list[str]]
   for line in lines:
     max_len = max(len(line), max_len)
     min_len = min(len(line), min_len)
-  print(f'The shortest line has {min_len} characters.')
-  print(f'The longest line has {max_len} characters.')
+  print(f'{min_len} characters in the shortest line.')
+  print(f'{max_len} characters in the longest line.')
   return lines
 
 
