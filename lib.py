@@ -162,6 +162,23 @@ def process_raw(raw: str, num_to_print: int = 10) -> list[str] | list[list[str]]
   print('Splitting into lines...')
   lines = raw.splitlines()
   print(f'{len(lines)} lines found.')
+  uniform = True
+  first_len = len(lines[0])
+  for line in lines:
+    if len(lines) != first_len:
+      uniform = Falses
+      break
+  if uniform:
+    print(f'Each line has {first_len} characters.')
+    return lines
+
+  max_len = 0
+  min_len = float('inf')
+  for line in lines:
+    max_len = max(len(line), max_len)
+    min_len = min(len(line), min_len)
+  print(f'The shortest line has {min_len} characters.')
+  print(f'The longest line has {max_len} characters.')
   return lines
 
 
