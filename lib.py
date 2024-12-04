@@ -1,5 +1,5 @@
 from collections import defaultdict, deque
-from collections.abc import Iterable
+from collections.abc import Iterable, Sequence
 from dataclasses import dataclass
 from functools import cache
 import heapq
@@ -8,6 +8,7 @@ from itertools import permutations
 import re
 import numpy as np
 from numpy.polynomial import Polynomial
+from typing import Any
 
 EN_TO_NUM = {
     'zero': 0,
@@ -47,7 +48,7 @@ LEFT = W
 RIGHT = E
 
 
-def valid_index(lst, index):
+def valid_index(lst: Sequence[Any], index: int) -> bool:
   if isinstance(index, int):
     if index < 0 or index >= len(lst):
       return False
@@ -61,7 +62,7 @@ def valid_index(lst, index):
   raise ValueError('index must be of type int or Iterable[int].')
 
 
-def get(lst, index, default):
+def get(lst: Sequence[Any], index: int, default: Any) -> Any:
   if isinstance(index, int):
     if index < 0 or index >= len(lst):
       return default
@@ -75,7 +76,7 @@ def get(lst, index, default):
   raise ValueError('index must be of type int or Iterable[int].')
 
 
-def groups_of(num, iterable):
+def groups_of(num: int, iterable: Iterable[Any]) -> list[list[Any]]:
   """Splits iterable into groups of num."""
   groups = []
   group = []
@@ -90,14 +91,15 @@ def groups_of(num, iterable):
   return groups
 
 
-def int_round(x):
+def int_round(x: float) -> int:
   rounded = np.round(x)
   if isinstance(x, Iterable):
     return rounded.astype(int)
   return int(rounded)
 
 
-def multiset(iterable, keys=None):
+# Deprecated: bad version of collections.Counter, created before I knew it existed
+def multiset(iterable: Iterable[Any], keys: Iterable[Any] | None = None) -> dict[Any, int]:
   counts = defaultdict(lambda: 0)
   for x in iterable:
     counts[x] += 1
@@ -106,7 +108,7 @@ def multiset(iterable, keys=None):
   return {k: counts.get(k, 0) for k in keys}
 
 
-def num_to_base(num, base, fixed_len=None):
+def num_to_base(num: int, base: int, fixed_len: int | None = None) -> str:
   radices = []
   while num > 0:
     radices.append(num % base)
@@ -118,7 +120,7 @@ def num_to_base(num, base, fixed_len=None):
   prefix = [0 for _ in range(fixed_len - len(radices))]
   return prefix + radices
 
-def powerset(iterable):
+def powerset(iterable: Iterable[Any]) -> Iterable[tuple[Any]]:
   'powerset([1,2,3]) --> () (1,) (2,) (3,) (1,2) (1,3) (2,3) (1,2,3)'
   s = list(iterable)
   return itertools.chain.from_iterable(
@@ -126,7 +128,7 @@ def powerset(iterable):
   )
 
 
-def process_raw(raw: str, num_to_print=10) -> list[str] | list[list[str]]:
+def process_raw(raw: str, num_to_print: int = 10) -> list[str] | list[list[str]]:
   """Processes raw AoC data."""
   if '\n\n' in raw:
     print('Splitting into blocks...')
@@ -163,7 +165,7 @@ def process_raw(raw: str, num_to_print=10) -> list[str] | list[list[str]]:
   return lines
 
 
-def range_intersection(ranges1, ranges2):
+def range_intersection(ranges1: list[Sequence[int, int]], ranges2: list[Sequence[int, int]]) -> list[Sequence[int, int]]:
   i1 = 0
   i2 = 0
   result = []
@@ -180,7 +182,7 @@ def range_intersection(ranges1, ranges2):
   return range_merge(result)
 
 
-def range_merge(ranges):
+def range_merge(ranges: Iterable[Sequence[int, int]]) -> list[Sequence[int, int]]:
   result = []
   for r in sorted(ranges, key=lambda r: r[0]):
     if r[0] >= r[1]:
@@ -192,5 +194,5 @@ def range_merge(ranges):
   return result
 
 
-def range_union(ranges1, ranges2):
+def range_union(ranges1: list[Sequence[int, int]], ranges2: list[Sequence[int, int]]) -> list[Sequence[int, int]]:
   return range_merge(ranges1 + ranges2)
