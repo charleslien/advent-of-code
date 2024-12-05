@@ -1,6 +1,7 @@
 from collections import defaultdict, deque, Counter
 from collections.abc import Iterable, Sequence
 from dataclasses import dataclass
+import functools
 from functools import cache
 import heapq
 import itertools
