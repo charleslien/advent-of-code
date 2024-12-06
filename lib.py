@@ -49,7 +49,7 @@ LEFT = W
 RIGHT = E
 
 
-def valid_index(lst: Sequence[Any], index: int) -> bool:
+def valid_index(lst: Sequence[Any], index: int | Iterable[int]) -> bool:
   if isinstance(index, int):
     if index < 0 or index >= len(lst):
       return False
@@ -63,7 +63,7 @@ def valid_index(lst: Sequence[Any], index: int) -> bool:
   raise ValueError('index must be of type int or Iterable[int].')
 
 
-def get(lst: Sequence[Any], index: int, default: Any) -> Any:
+def get(lst: Sequence[Any], index: int | Iterable[int], default: Any) -> Any:
   if isinstance(index, int):
     if index < 0 or index >= len(lst):
       return default
@@ -109,7 +109,7 @@ def multiset(iterable: Iterable[Any], keys: Iterable[Any] | None = None) -> dict
   return {k: counts.get(k, 0) for k in keys}
 
 
-def num_to_base(num: int, base: int, fixed_len: int | None = None) -> str:
+def num_to_base(num: int, base: int, fixed_len: int | None = None) -> list[int]:
   radices = []
   while num > 0:
     radices.append(num % base)
@@ -119,7 +119,8 @@ def num_to_base(num: int, base: int, fixed_len: int | None = None) -> str:
   if len(radices) > fixed_len:
     print(f'{num} in base {base} is longer than given fixed length {fixed_len}.')
   prefix = [0 for _ in range(fixed_len - len(radices))]
-  return prefix + radices
+  prefix.extend(reversed(radices))
+  return prefix
 
 def powerset(iterable: Iterable[Any]) -> Iterable[tuple[Any]]:
   'powerset([1,2,3]) --> () (1,) (2,) (3,) (1,2) (1,3) (2,3) (1,2,3)'
